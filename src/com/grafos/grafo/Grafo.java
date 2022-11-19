@@ -1,46 +1,35 @@
-package com.grafos.grafo;//Implementar visualização aqui
+package com.grafos.grafo;
 
-import java.util.Scanner;
+import java.util.List;
 
-public class Grafo {
-//	public int matriz_VA[][];
-//	public static void Grafo(String args[]){
-//	//V = vertice
-//	//A = Aresta
-//	Scanner teclado = new Scanner(System.in);
-//	Grafo_manual grafo = new Grafo_manual();
-//	System.out.println("Insira a quantidade de vértices existentes no src.Grafo.grafo: ");
-//	int Ve = teclado.nextInt();
-//	grafo.matriz_VA = new int[Ve][Ve];
-//	}
-//	
-//
-//	public void data_grafo() {
-//	System.out.println("Quantidade de vértices: " + grafo.matriz_VA.length)
-//	
-//	}
-//
-//	public void insert_A() {
-//	
-//
-//	
-//	}
-//
-//	public void verifica_A() {
-//	
-//	
-//	
-//	} 
-//
-//	public void print_grafo_listAdj() {
-//	
-//
-//
-//	}
-//
-//	public void print_grafo_matriz() {
-//	
-//
-//
-//	}
+public abstract class Grafo {
+	private List<Vertice> vertices;
+	private List<Aresta> arestas;
+	private int quantidadeVertices;
+
+    public List<Vertice> getVertices() {
+        return vertices;
+    }
+
+    public void setVertices(List<Vertice> vertices) {
+    	this.vertices = vertices;
+    }
+
+    public List<Aresta> getArestas() {
+		return arestas;
+	}
+
+	public void setArestas(List<Aresta> arestas) {
+		this.arestas = arestas;
+	}
+
+	public int getQuantidadeVertices() {
+		return quantidadeVertices;
+	}
+
+	public void setQuantidadeVertices(int quantidadeVertices) {
+		this.quantidadeVertices = quantidadeVertices;
+	}
+	
+	
 }

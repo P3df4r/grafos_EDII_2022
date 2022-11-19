@@ -7,7 +7,7 @@ import com.grafos.enums.*;
 public class Vertice {
     private String etiqueta;
     private Cores cor = Cores.BRANCO;
-    private List<Vertice> adjacencias;
+//    private List<Vertice> adjacencias;
 
     public Vertice(String etiqueta) {
         this.etiqueta = etiqueta;
@@ -29,11 +29,11 @@ public class Vertice {
         this.cor = cor;
     }
 
-    public List<Vertice> getAdjacencias() {
-        return adjacencias;
-    }
-
-    public void setAdjacencias(List<Vertice> adjacencias) {
-        this.adjacencias = adjacencias;
-    }
+//    public List<Vertice> getAdjacencias() {
+//        return adjacencias;
+//    }
+//
+//    public void setAdjacencias(List<Vertice> adjacencias) {
+//        this.adjacencias = adjacencias;
+//    }
 }
