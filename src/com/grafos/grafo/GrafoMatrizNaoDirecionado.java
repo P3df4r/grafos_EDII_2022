@@ -74,8 +74,7 @@ public class GrafoMatrizNaoDirecionado extends Grafo implements INaoDirecionado{
 
 	@Override
 	public int imprimirGrauDoVertice(Vertice vertice) {
-		// TODO Auto-generated method stub
-		return 0;
+		return vertice.getAdjacencias().size();
 	}
 
 }
