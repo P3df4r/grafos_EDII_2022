@@ -26,20 +26,52 @@ public class GrafoMatrizNaoDirecionado extends Grafo implements INaoDirecionado{
 
 	@Override
 	public void inserirAresta(Aresta aresta) throws Exception {
+		Vertice origem = aresta.getOrigem();
+		Vertice destino = aresta.getOrigem();
+		
+		if(!this.existeVerticeNoGrafo(origem) || !this.existeVerticeNoGrafo(destino))
+			throw new Exception("Não é possível criar uma aresta com vértice(s) não existe(m) no grafo.");
+		
 		this.adicionaAdjacenteAoVertice(aresta);
 
 		List<Aresta> arestasAtualizadas = this.getArestas();
 		arestasAtualizadas.add(aresta);
 		this.setArestas(arestasAtualizadas);
+		
+		int indexOrigem = this.getVertices().indexOf(origem);
+		int indexDestino = this.getVertices().indexOf(destino);
+		
+		matriz[indexOrigem][indexDestino] = true;
+		matriz[indexDestino][indexOrigem] = true;
 	}
 
 	@Override
 	public void inserirArestas(List<Aresta> arestas) throws Exception {
+		// Verifica existência dos vértices no grafo
+		for (Aresta aresta : arestas) {
+			Vertice origem = aresta.getOrigem();
+			Vertice destino = aresta.getOrigem();
+			
+			if(!this.existeVerticeNoGrafo(origem) || !this.existeVerticeNoGrafo(destino))
+				throw new Exception("Não é possível criar uma aresta com vértice(s) não existe(m) no grafo.");
+		}
+		
 		this.adicionaAdjacenteAoVertice(arestas);
 		
 		List<Aresta> arestasAtualizadas = this.getArestas();
 		arestasAtualizadas.addAll(arestas);
 		this.setArestas(arestasAtualizadas);
+		
+		for (Aresta aresta : arestas) {
+			Vertice origem = aresta.getOrigem();
+			Vertice destino = aresta.getOrigem();
+			
+			int indexOrigem = this.getVertices().indexOf(origem);
+			int indexDestino = this.getVertices().indexOf(destino);
+			
+			matriz[indexOrigem][indexDestino] = true;
+			matriz[indexDestino][indexOrigem] = true;
+		}
 	}
 	
 	
@@ -55,6 +87,12 @@ public class GrafoMatrizNaoDirecionado extends Grafo implements INaoDirecionado{
 			List<Aresta> novasArestas = this.getArestas();
 			novasArestas.remove(aresta);
 			this.setArestas(novasArestas);
+			
+			int indexOrigem = this.getVertices().indexOf(origem);
+			int indexDestino = this.getVertices().indexOf(destino);
+			
+			matriz[indexOrigem][indexDestino] = false;
+			matriz[indexDestino][indexOrigem] = false;
 		} else {
 			throw new Exception("Não é possível remover aresta que não existe no grafo.");
 		}
