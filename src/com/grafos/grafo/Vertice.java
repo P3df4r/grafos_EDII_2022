@@ -31,8 +31,16 @@ public class Vertice {
         this.cor = cor;
     }
 
+    public void setAdjacencia(Vertice adjacencia) {
+        this.adjacencias.add(adjacencia);
+    }
+    
     public void setAdjacencias(List<Vertice> adjacencias) {
         this.adjacencias = adjacencias;
+    }
+    
+    public void removerAdjacencia(Vertice vertice) {
+        this.adjacencias.remove(vertice);
     }
     
     public List<Vertice> getAdjacencias() {

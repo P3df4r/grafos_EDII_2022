@@ -25,24 +25,35 @@ public class GrafoMatrizNaoDirecionado extends Grafo implements INaoDirecionado{
 	}
 
 	@Override
-	public void inserirAresta(Aresta aresta) {
+	public void inserirAresta(Aresta aresta) throws Exception {
+		this.adicionaAdjacenteAoVertice(aresta);
+
 		List<Aresta> arestasAtualizadas = this.getArestas();
 		arestasAtualizadas.add(aresta);
 		this.setArestas(arestasAtualizadas);
 	}
 
 	@Override
-	public void inserirArestas(List<Aresta> arestas) {
+	public void inserirArestas(List<Aresta> arestas) throws Exception {
+		this.adicionaAdjacenteAoVertice(arestas);
+		
 		List<Aresta> arestasAtualizadas = this.getArestas();
 		arestasAtualizadas.addAll(arestas);
 		this.setArestas(arestasAtualizadas);
 	}
-
+	
+	
 	@Override
 	public void removerAresta(Aresta aresta) throws Exception {
 		if (this.existeAresta(aresta)) {
+			Vertice origem = aresta.getOrigem();
+			Vertice destino = aresta.getOrigem();
+			
+			origem.removerAdjacencia(destino);
+			destino.removerAdjacencia(origem);
+			
 			List<Aresta> novasArestas = this.getArestas();
-			novasArestas.remove(novasArestas);
+			novasArestas.remove(aresta);
 			this.setArestas(novasArestas);
 		} else {
 			throw new Exception("Não é possível remover aresta que não existe no grafo.");
@@ -76,5 +87,40 @@ public class GrafoMatrizNaoDirecionado extends Grafo implements INaoDirecionado{
 	public int imprimirGrauDoVertice(Vertice vertice) {
 		return vertice.getAdjacencias().size();
 	}
+	
+	private boolean existeVerticeNoGrafo(Vertice vertice) {
+		return this.getVertices().contains(vertice);
+	}
 
+	private void adicionaAdjacenteAoVertice(Aresta aresta) throws Exception {
+		this.adicionarAdjacente(aresta);
+	}
+
+	private void adicionaAdjacenteAoVertice(List<Aresta> arestas) throws Exception {
+		for (Aresta aresta : arestas)
+			this.adicionarAdjacente(aresta);
+	}
+	
+	private void adicionarAdjacente(Aresta aresta) throws Exception {
+		Vertice origem = aresta.getOrigem();
+		Vertice destino = aresta.getDestino();
+		
+		if(!this.existeVerticeNoGrafo(origem) || !this.existeVerticeNoGrafo(destino))
+			throw new Exception("Vértice não existe no grafo.");
+		
+		List<Vertice> listaVerticesAtualizada = this.getVertices();
+		
+		int indexOrigem = listaVerticesAtualizada .indexOf(origem);
+		int indexDestino = listaVerticesAtualizada .indexOf(destino);
+		
+		// Adiciona um vertice como adjacente do outro
+		origem.setAdjacencia(destino);
+		destino.setAdjacencia(origem);
+		
+		listaVerticesAtualizada.set(indexOrigem, origem);
+		listaVerticesAtualizada.set(indexDestino, destino);
+		
+		this.setVertices(listaVerticesAtualizada);
+	}
+	
 }
