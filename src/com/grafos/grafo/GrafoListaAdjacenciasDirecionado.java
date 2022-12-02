@@ -81,9 +81,9 @@ public class GrafoListaAdjacenciasDirecionado extends Grafo implements IDirecion
 	}
 
 	@Override
-	public String imprimirGrauEntradaSaidaDoVertice(Vertice vertice) {
+	public void imprimirGrauEntradaSaidaDoVertice(Vertice vertice) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 	
 	private boolean existeVerticeNoGrafo(Vertice vertice) {
