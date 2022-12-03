@@ -1,9 +1,9 @@
 package com.grafos.grafo;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.grafos.interfaces.IDirecionado;
-import com.grafos.interfaces.INaoDirecionado;
 
 public class GrafoListaAdjacenciasDirecionado extends Grafo implements IDirecionado {
 
@@ -82,7 +82,20 @@ public class GrafoListaAdjacenciasDirecionado extends Grafo implements IDirecion
 
 	@Override
 	public void imprimirGrauEntradaSaidaDoVertice(Vertice vertice) {
-		// TODO Auto-generated method stub
+		List<Vertice> listaVerticesNoGrafoAtualizada = this.getVertices()
+				.stream()
+				.filter(verticeNoGrafo -> verticeNoGrafo != vertice)
+				.collect(Collectors.toList());
+		int grauSaida = vertice.getAdjacencias().size();
+		int grauEntrada = 0; 
+
+		for (Vertice verticeNoGrafo : listaVerticesNoGrafoAtualizada) {
+			if(verticeNoGrafo.getAdjacencias().contains(vertice))
+				grauEntrada++;
+		}
+		
+		System.out.println("Grau de entrada: " + grauEntrada +  
+				"\nGrau de saída: " + grauSaida);	
 		
 	}
 	
