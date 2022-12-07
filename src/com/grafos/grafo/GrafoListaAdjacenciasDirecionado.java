@@ -123,15 +123,15 @@ public class GrafoListaAdjacenciasDirecionado extends Grafo implements IDirecion
 		List<Vertice> listaVerticesAtualizada = this.getVertices();
 		
 		int indexOrigem = listaVerticesAtualizada .indexOf(origem);
-		int indexDestino = listaVerticesAtualizada .indexOf(destino);
 		
-		// Adiciona um vertice como adjacente do outro
+		// Adiciona um vertice como adjacente
 		origem.setAdjacencia(destino);
-		destino.setAdjacencia(origem);
 		
+		// Define antecessor de destino
+		destino.setAntecessor(origem);
+				
 		listaVerticesAtualizada.set(indexOrigem, origem);
-		listaVerticesAtualizada.set(indexDestino, destino);
-		
+				
 		this.setVertices(listaVerticesAtualizada);
 	}
 	
