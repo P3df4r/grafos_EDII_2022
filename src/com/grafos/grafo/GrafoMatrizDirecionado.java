@@ -5,11 +5,11 @@ import java.util.List;
 import com.grafos.interfaces.IDirecionado;
 
 public class GrafoMatrizDirecionado extends Grafo implements IDirecionado{
-	private boolean[][] matriz; 
+	private float[][] matriz; 
 	
 	public GrafoMatrizDirecionado(int quantidadeVertices) {
 		setQuantidadeVertices(quantidadeVertices);
-		this.matriz = new boolean[quantidadeVertices][quantidadeVertices];
+		this.matriz = new float[quantidadeVertices][quantidadeVertices];
 	}
 
 	@Override
@@ -30,6 +30,7 @@ public class GrafoMatrizDirecionado extends Grafo implements IDirecionado{
 	public void inserirAresta(Aresta aresta) throws Exception {
 		Vertice origem = aresta.getOrigem();
 		Vertice destino = aresta.getOrigem();
+		float peso = aresta.getPeso();
 		
 		if(!this.existeVerticeNoGrafo(origem) || !this.existeVerticeNoGrafo(destino))
 			throw new Exception("Não é possível criar uma aresta com vértice(s) não existe(m) no grafo.");
@@ -43,7 +44,7 @@ public class GrafoMatrizDirecionado extends Grafo implements IDirecionado{
 		int indexOrigem = this.getVertices().indexOf(origem);
 		int indexDestino = this.getVertices().indexOf(destino);
 		
-		matriz[indexOrigem][indexDestino] = true;
+		matriz[indexOrigem][indexDestino] = peso;
 		
 	}
 
@@ -66,12 +67,19 @@ public class GrafoMatrizDirecionado extends Grafo implements IDirecionado{
 		
 		for (Aresta aresta : arestas) {
 			Vertice origem = aresta.getOrigem();
-			Vertice destino = aresta.getOrigem();
+			Vertice destino = aresta.getDestino();
+			float peso = aresta.getPeso();
 			
 			int indexOrigem = this.getVertices().indexOf(origem);
 			int indexDestino = this.getVertices().indexOf(destino);
 			
-			matriz[indexOrigem][indexDestino] = true;
+			matriz[indexOrigem][indexDestino] = peso;
+			
+			
+			
+			// matriz[Integer.parseInt(origem.getEtiqueta())][Integer.parseInt(destino.getEtiqueta())] = peso;
+		
+			// System.out.println(Integer.parseInt(origem.getEtiqueta()) + "-" + Integer.parseInt(destino.getEtiqueta()));
 		}
 	}
 
@@ -82,6 +90,7 @@ public class GrafoMatrizDirecionado extends Grafo implements IDirecionado{
 		
 		Vertice origem = aresta.getOrigem();
 		Vertice destino = aresta.getOrigem();
+		float peso = aresta.getPeso();
 		
 		origem.removerAdjacencia(destino);
 		destino.removerAdjacencia(origem);
@@ -93,7 +102,7 @@ public class GrafoMatrizDirecionado extends Grafo implements IDirecionado{
 		int indexOrigem = this.getVertices().indexOf(origem);
 		int indexDestino = this.getVertices().indexOf(destino);
 		
-		matriz[indexOrigem][indexDestino] = false;
+		matriz[indexOrigem][indexDestino] = peso;
 	}
 
 	@Override
